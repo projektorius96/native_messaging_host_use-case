@@ -12,11 +12,8 @@ void main(List<String> arguments) {
   var sink = logFile.openWrite(mode: dart_io.FileMode.append);
 
   dart_io.stdin.listen((data) {
-    /// DEV_NOTE # somewhy [String.fromCharCodes] forces Chrome to exit native messaging host with Error: Native host has exited.
-    /* sink.write( String.fromCharCodes(decodeMessage(data)) ); */// DOES NOT WORK
-    
-    /// [cont'd] # yet calling sink.write( decodeMessage(data) ) writes [123, 34, 116, 101, 120, 116, 34, 58, 34, 72, 101, 108, 108, 111, 34, 125] to .\\bin\\main.log
-    sink.write(decodeMessage(data)); // WORKS JUST FINE
+    /// writes [data] to .\\bin\\main.log
+    sink.write(decodeMessage(data));
   });
 
   // Graceful termination on Ctrl+C (SIGINT), see [cont'd] below
